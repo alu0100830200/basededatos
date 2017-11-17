@@ -1,0 +1,86 @@
+SQL> SELECT SYSDATE
+  2  FROM DUAL;
+
+SYSDATE                                                                         
+---------                                                                       
+17-NOV-17                                                                       
+
+SQL> SELECT TO_CHAR(SYSDATE, 'HH:MI:SS')
+  2  FROM DUAL;
+
+TO_CHAR(                                                                        
+--------                                                                        
+12:12:29                                                                        
+
+SQL> SELECT TO_CHAR(SYSDATE, 'DAY DD MON MM YYYY')
+  2  FROM DUAL;
+
+TO_CHAR(SYSDATE,'DAYDDMONMMYYYY')                                               
+------------------------------------------------------------                    
+FRIDAY    17 NOV 11 2017                                                        
+
+SQL> SELECT TO_CHAR(SYSDATE,'HH:MM')
+  2  FROM DUAL;
+
+TO_CH                                                                           
+-----                                                                           
+12:11                                                                           
+
+SQL> SELECT (SYSDATE-FI)
+  2  FROM PLAN_DOCENTE
+  3  WHERE (DNI=8888 AND CAS=11);
+
+(SYSDATE-FI)                                                                    
+------------                                                                    
+  2999.50976                                                                    
+
+SQL> SELECT DISTINCT P AS NOMBRE
+  2  FROM PROFESOR NATURAL JOIN PLAN_DOCENTE
+  3  WHERE ((FF IS NULL AND(SYSDATE-FI)>365)OR(ff IS NOT NULL AND(FF-FI)>365));
+
+NOMBRE                                                                          
+------------------------------------------------------------                    
+MARIO                                                                           
+JUAN                                                                            
+PEDRO                                                                           
+FRANCISCO                                                                       
+SOLEDAD                                                                         
+CARLOS                                                                          
+DAVID                                                                           
+IVAN                                                                            
+CARMEN                                                                          
+MARIA                                                                           
+JOSE MANUEL                                                                     
+
+NOMBRE                                                                          
+------------------------------------------------------------                    
+ANGELA                                                                          
+
+12 rows selected.
+
+SQL> SELECT COUNT(DNI)
+  2  FROM DEPARTAMENTO JOIN AREA
+  3  ON DEPARTAMENTO.CD = AREA.CD
+  4  JOIN PROFESOR
+  5  ON AREA.CAR=PROFESOR.CAR
+  6  WHEERE D='ASTROFISICA'
+  7  GROUP BY D;
+WHEERE D='ASTROFISICA'
+*
+ERROR at line 6:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT COUNT(DNI)
+  2  FROM DEPARTAMENTO JOIN AREA
+  3  ON DEPARTAMENTO.CD = AREA.CD
+  4  JOIN PROFESOR
+  5  ON AREA.CAR=PROFESOR.CAR
+  6  WHERE D='ASTROFISICA'
+  7  GROUP BY D;
+
+COUNT(DNI)                                                                      
+----------                                                                      
+         1                                                                      
+
+SQL> SPOOL OFF
